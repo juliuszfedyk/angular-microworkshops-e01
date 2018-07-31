@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -6,6 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './participant.component.html',
   styleUrls: ['./participant.component.scss']
 })
-export class ParticipantComponent {
+export class ParticipantComponent implements OnInit {
   @Input() participant: FormGroup;
+
+  ngOnInit(): void {
+   // this.participant.get('docType').setValidators(this.onlyJohnValidator);
+  }
 }

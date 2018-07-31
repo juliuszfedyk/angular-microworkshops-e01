@@ -37,6 +37,8 @@
                formControlName="bookingOwnerLName">
         <small id="emailHelp"
                class="form-text text-muted"></small>
+        <span class="text-block"
+              *ngIf="myFormGroup.controls.bookingOwnerLName.errors?.onlyJohnValidator">This is valid if firstname is John.</span>
       </div>
     </div>
   </div>
@@ -44,6 +46,7 @@
     <div class="col">
       <button (click)="addParticipant()">Add</button>
       <app-participant *ngFor="let participant of participants.controls; let i = index"
+
                        [participant]="participant"></app-participant>
     </div>
   </div>
