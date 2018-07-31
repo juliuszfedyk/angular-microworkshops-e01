@@ -1,22 +1,55 @@
 <form [formGroup]="myFormGroup">
-  <div class="form-group">
-    <label for="tourType">Example multiple select</label>
-    <select class="form-control"
-            id="tourType">
-      <option>zoo safari</option>
-      <option>skiing trip</option>
-      <option>snorkelling with sharks</option>
-      <option>couchrafting</option>
-    </select>
+  <div class="row">
+    <h2>Booking owner</h2>
   </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email"
-           class="form-control"
-           id="exampleInputEmail1"
-           aria-describedby="emailHelp"
-           placeholder="Enter email">
-    <small id="emailHelp"
-           class="form-text text-muted">We'll never share your email with anyone else.</small>
+  <div class="row">
+    <div class="col">
+
+      <div class="form-group">
+        <label for="booking_email">Email address</label>
+        <input type="email"
+               class="form-control"
+               id="booking_email"
+               aria-describedby="emailHelp"
+               placeholder="Enter email"
+               formControlName="bookingOwnerEmail">
+        <small id="emailHelp"
+               class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="booking_fname">First Name</label>
+        <input type="text"
+               class="form-control"
+               id="booking_fname"
+               aria-describedby="emailHelp"
+               placeholder="First Name"
+               formControlName="bookingOwnerFName">
+        <small id="emailHelp"
+               class="form-text text-mutsed"></small>
+      </div>
+      <div class="form-group">
+        <label for="booking_lname">Last Name</label>
+        <input type="text"
+               class="form-control"
+               id="booking_lname"
+               aria-describedby="emailHelp"
+               placeholder="Last Name"
+               formControlName="bookingOwnerLName">
+        <small id="emailHelp"
+               class="form-text text-muted"></small>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button (click)="addParticipant()">Add</button>
+      <app-participant *ngFor="let participant of participants.controls; let i = index"
+                       [participant]="participant"></app-participant>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      {{myFormGroup.value | json}}
+    </div>
   </div>
 </form>

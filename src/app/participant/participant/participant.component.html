@@ -1,3 +1,54 @@
-<div class="participant">
-
+<div class="participant"
+     [formGroup]="participant">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="nName">First Name</label>
+        <input type="text"
+               class="form-control"
+               id="nName"
+               aria-describedby="emailHelp"
+               placeholder="First Name"
+               formControlName="fName">
+      </div>
+      <div class="form-group">
+        <label for="lName">Last Name</label>
+        <input type="text"
+               class="form-control"
+               id="lName"
+               aria-describedby="emailHelp"
+               placeholder="Last Name"
+               formControlName="lName">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text"
+               class="form-control"
+               id="email"
+               aria-describedby="emailHelp"
+               placeholder="Email"
+               formControlName="email">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="docType">Document Type</label>
+        <input type="text"
+               class="form-control"
+               id="docType"
+               aria-describedby="emailHelp"
+               placeholder="Document Type"
+               formControlName="docType">
+      </div>
+      <div class="form-group">
+        <label for="docNumber">Document Nr</label>
+        <input type="text"
+               class="form-control"
+               id="docNumber"
+               aria-describedby="emailHelp"
+               placeholder="Document Nr"
+               formControlName="docNumber">
+      </div>
+    </div>
+  </div>
 </div>

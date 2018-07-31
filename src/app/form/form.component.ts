@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -8,20 +8,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormComponent {
   public myFormGroup: FormGroup;
-  constructor(@Inject(FormBuilder) private fb: FormBuilder) {
-    this.myFormGroup = fb.group({
-      tourType: fb.control(null, Validators.required),
-      email: fb.control(null, Validators.email),
-      participants: fb.array([])
-    });
-  }
-  newParticipant(): FormGroup {
-    return this.fb.group({
-      firstName: this.fb.control(null),
-      lastName: this.fb.control(null),
-      idType: this.fb.control('passport'),
-      idNumber: this.fb.control(null)
+  constructor() {
+    this.myFormGroup = new FormGroup({
+      bookingOwnerEmail: new FormControl(null),
+      bookingOwnerFName: new FormControl(null),
+      bookingOwnerLName: new FormControl(null),
+      participants: new FormArray([])
     });
   }
 
+  get participants(): FormArray {
+    return this.myFormGroup.get('participants') as FormArray;
+  }
+  addParticipant() {
+    this.participants.push(this.newParticipant());
+  }
+  newParticipant() {
+    return new FormGroup({
+      fName: new FormControl(null),
+      lName: new FormControl(null),
+      email: new FormControl(null),
+      docType: new FormControl(null),
+      docNumber: new FormControl(null)
+    });
+  }
 }
