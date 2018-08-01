@@ -1,20 +1,127 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="row">
+    <h1>Tour Registration Form</h1>
+    <div class="col-md-8">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <fieldset>
+                <fieldset formArrayName="participants" *ngFor="let participant of form.get('participants').controls; let i = index;">
+                    <legend></legend>
+                    <div [formGroupName]="i">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span>#{{i}} participant</span>
+                                <div>
+                                    <button *ngIf="i > 0" class="btn btn-danger" (click)="removeParticipantAt(i)"><span class="glyphicon glyphicon-minus"></span></button>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" formControlName="firstName" placeholder="First name" />
+                                        <span class="help-block" *ngIf="isParticipantValidAt(i, 'fistName', 'required')">Name is required</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select formControlName="idType" name="idType" class="form-control">
+                                            <option [ngValue]="null">Please select an Id type</option>
+                                            <option *ngFor="let type of idTypes" [ngValue]="type">{{type}}</option>
+                                        </select>
+                                        <span class="help-block" *ngIf="isParticipantValidAt(i, 'idType', 'required')">A valid id is required.</span>
+                                    </div>
+                                </div>
+                                <div class="row top-buffer">
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" formControlName="lastName" placeholder="Last name" />
+                                        <span class="help-block" *ngIf="isParticipantValidAt(i, 'lastName', 'required')">Surname is required.</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" formControlName="docNumber" placeholder="Doc number" />
+                                        <span class="help-block" *ngIf="isParticipantValidAt(i, 'docNumber', 'required')">A valid document number is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <button type="button" class="btn btn-default" (click)="addParticipant()"><span class="glyphicon glyphicon-plus"></span></button>
+            </fieldset>
+            <fieldset class="top-buffer">
+                <legend></legend>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="form-group">
+                            <label for="roomType">Room type:</label>
+                            <select id="roomType" formControlName="roomType" name="roomType" class="form-control">
+                                <option [ngValue]="null">Select a room type</option>
+                                    <option *ngFor="let type of roomTypes" [ngValue]="type">{{type}}</option>
+                                </select>
+                            <span class="help-block" *ngIf="!form.controls.roomType.pristine && form.controls.roomType.errors?.required">It is required to select a room type.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="food">Food:</label>
+                            <select id="food" formControlName="food" name="food" class="form-control">
+                                <option [ngValue]="null">Food selection</option>
+                                    <option *ngFor="let f of foods" [ngValue]="f">{{f}}</option>
+                                </select>
+                            <span class="help-block" *ngIf="!form.controls.food.pristine && form.controls.food.errors?.required">It is required to make your food selection.</span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="top-buffer">
+                <legend></legend>
+                <div class="row" formGroupName="activities">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="activities">Activities:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label><input type="checkbox" formControlName="activity-0" /> Yoga classes</label>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label><input type="checkbox" formControlName="activity-2" /> Pool</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 col-md-offset-2">
+                            <div class="form-group">
+                                <label><input type="checkbox" formControlName="activity-1" /> Spa</label>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label><input type="checkbox" formControlName="activity-3" /> Windsurfing</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="activities">SPA:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <select id="spa" formControlName="spa" name="spa" class="form-control">
+                                <option [ngValue]="null">Select from below</option>
+                                <option *ngFor="let e of extras" [ngValue]="e">{{e}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2" *ngIf="form.controls.spa.value">
+                        <button type="button" class="btn btn-default" (click)="addExtras()"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                    <div class="row" *ngIf="selectedExtras.length > 0">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div *ngFor="let extra of selectedExtras; let i=index;">
+                                <a (click)="removeExtraAt(i)">{{extra}}&nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <button class="btn btn-default pull-right" type="submit" [disabled]="!form.valid">Pay</button>
+        </form>
+    </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
