@@ -1,16 +1,9 @@
-import { FormGroup } from '@angular/forms';
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
-export class AppComponent{
-  form: FormGroup;
-
-  constructor() {
-  }
-
-
+export class AppComponent {
 }

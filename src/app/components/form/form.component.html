@@ -1,0 +1,45 @@
+<div class="form-component col">
+    <h1>Tour Reg Form</h1>
+    <form [formGroup]="tourForm"
+    (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="tourTypeControl">Tour Type</label>
+            <select class="form-control" id="tourTypeControl" formControlName="tourType">
+                <option
+                    *ngFor="let tourType of tourTypes"
+                    [value]="tourType.id">{{tourType.name}}
+
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input
+                type="email"
+                class="form-control"
+                id="email"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                formControlName="email"
+            >
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <hr>
+        <button class="btn" (click)="addParticipant()">add person</button>
+        <br><br>
+        <div class="participants" formArrayName="participants">
+            <div
+                *ngFor="let participant of participants.controls; let i = index"
+                [formGroupName]="i"
+                class="participant">
+                <input type="text"
+                id="fname"
+                formControlName="firstName">
+            </div>
+
+        </div>
+        <input type="submit" class="btn btn-lg">
+    </form>
+    <div>{{tourForm.value | json}}</div>
+</div>
