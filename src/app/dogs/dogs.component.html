@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col">
+        <h2>Look at these awesome fellas</h2>
+        <form [formGroup]="form" class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="dogsInput" class="mr-2">Limit gallery size</label>
+                <input formControlName="dogs" type="number" class="form-control" value="5" id="dogsInput" placeholder="Limit" min="1" max="100">
+            </div>
+            <button type="button" (click)="refresh()" class="btn btn-primary mb-2">Refresh</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card-columns">
+            <div class="card" *ngFor="let image of dogs">
+                <img class="card-img-top" style="max-width: 350px; max-height: 470px" [src]="image" alt="Card image cap">
+                <div class="card-footer">
+                    <small class="text-muted">Image from <a href="https://dog.ceo" target="_blank">https://dog.ceo</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

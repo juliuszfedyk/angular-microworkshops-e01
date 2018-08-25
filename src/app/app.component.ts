@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from './authentication.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,21 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  ngOnInit() {
-    // TODO: Implement ngOnInit
+  private snapshot: string;
+  constructor(private authService: AuthenticationService, private router: Router,
+    private route: ActivatedRoute) { }
+
+  ngOnInit() { 
+    this.route.params.subscribe(p =>{
+      console.log(p);
+    });
   }
 
   isAuthenticated(): boolean {
-    // TODO: Implement isAuthenticated
-    return false;
+    return this.authService.isAuthenticated();
   }
 
-  logout(): void {
-    // TODO: Implement logout
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 
-  isInLogin(): boolean {
-    // TODO: Implement isInLogin
-    return false;
+  isInLogin() {
+    return this.router.url.includes('/login');
   }
 }
