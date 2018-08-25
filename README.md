@@ -1,5 +1,19 @@
 # NgWorkshop3
 
+## API
+The API to work in this exercise would be the following:
+* https://ng-workshop-3.azurewebsites.net
+
+Navigating there you will find Swagger documentation on the endpoints.
+
+The Authorization server would be in this address:
+* https://ng-workshop-3-auth.azurewebsites.net
+
+To find out more for the OIDC endpoints it exposes:
+* https://ng-workshop-3-auth.azurewebsites.net/.well-known/openid-configuration
+
+## Notes about angular client
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
 
 ## Development server
