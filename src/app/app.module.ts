@@ -15,6 +15,7 @@ import { AuthorizationInterceptor } from './authorization-interceptor';
 import { AuthenticationGuard } from './authentication.guard';
 import { AuthenticationService } from './authentication.service';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { HttpErrorInterceptor } from './http-error-interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,11 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
       useClass: AuthorizationInterceptor,
       multi: true
     },
-    AuthenticationGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    },
     AuthenticationService,
     JwtHelperService
   ],

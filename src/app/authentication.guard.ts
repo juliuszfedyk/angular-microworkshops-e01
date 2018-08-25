@@ -3,6 +3,9 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 
+// You can use this instead of an interceptor if you wish to handle
+// the route guarding before even sending the request
+
 @Injectable({
   providedIn: 'root'
 })

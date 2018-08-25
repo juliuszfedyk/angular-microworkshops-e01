@@ -12,7 +12,7 @@ type DogViewModel = {
   providedIn: 'root'
 })
 export class DogsService {
-  private url: string = "https://ng-workshop-3.azurewebsites.net/";
+  private url: string = "https://ng-workshop-3.azurewebsites.net";
   constructor(private http: HttpClient) { }
 
   getDogs(limit: number = 5): Observable<string[]> {
