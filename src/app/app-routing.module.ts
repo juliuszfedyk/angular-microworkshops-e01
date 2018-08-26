@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: '403', component: ForbiddenComponent },
-  { path: 'dogs', component: DogsComponent },
+  { path: 'dogs', component: DogsComponent, canActivate: [AuthenticationGuard] },
   { path: 'dogs/hound', component: HoundComponent, canActivate: [HoundGuard] },
   { path: 'dogs/boxer', component: BoxerComponent, canActivate: [BoxerGuard] }
 ];
